@@ -22,3 +22,6 @@ jobs:
           java -version
           echo "Maven version should print 3.x.x"
           mvn -version
+
+      - name: Test and package
+        run: mvn clean package test
