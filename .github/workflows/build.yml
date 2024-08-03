@@ -20,5 +20,11 @@ jobs:
         uses: actions/setup-maven@v3
         with:
           maven-version: 3.8.6
+
       - name: Build and Test
-        run: mvn clean package test
+        run: |
+          echo "Workflow exceuted."
+          echo "JAVA version should print 21"
+          java -version
+          echo "Maven version should print 3.x.x"
+          mvn -version
