@@ -1,13 +1,16 @@
 package io.agamivriddhi.base;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class BaseApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+  @DisplayName("Verifying the Context Loads")
+  @Test
+  void contextLoads() {
+  }
 
 }
