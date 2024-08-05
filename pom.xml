@@ -12,7 +12,7 @@
 	<artifactId>base</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>base</name>
-	<description>Base project for springboot</description>
+	<description>Base project for spring-boot</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -47,6 +47,23 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.4.0</version>
+				<configuration>
+					<configLocation>config/checkstyle.xml</configLocation>
+				</configuration>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
