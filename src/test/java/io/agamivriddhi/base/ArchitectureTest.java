@@ -28,6 +28,9 @@ public class ArchitectureTest {
 //        rule.check(javaClasses);
 //    }
 
+    /**
+     * Checks if every controller follows proper naming convention and has the required annotation
+     */
     @ArchTest
     private ArchRule controller_naming = classes().that().areAnnotatedWith(Controller.class)
             .or().areAnnotatedWith(RestController.class)
@@ -36,6 +39,9 @@ public class ArchitectureTest {
             .andShould().haveSimpleNameEndingWith(CONTROLLER)
             .because("controller should be easy to locate");
 
+    /**
+     * Checks if every service follows proper naming convention and has the required annotation
+     */
     @ArchTest
     private ArchRule service_naming = classes().that().areAnnotatedWith(Service.class)
             .or().haveSimpleNameEndingWith(SERVICE)
