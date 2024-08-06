@@ -54,7 +54,7 @@ by Joshua Bloch in his book Effective Java -->
 
     <module name="LineLength">
         <!-- Checks if a line is too long. -->
-        <property name="max" value="${com.puppycrawl.tools.checkstyle.checks.sizes.LineLength.max}" default="100"/>
+        <property name="max" value="${com.puppycrawl.tools.checkstyle.checks.sizes.LineLength.max}" default="120"/>
         <property name="severity" value="error"/>
 
         <!-- Ignore lines that have any series of 80 or more non-whitespace characters.
