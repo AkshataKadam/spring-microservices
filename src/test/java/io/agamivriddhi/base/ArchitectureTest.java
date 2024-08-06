@@ -18,8 +18,6 @@ public class ArchitectureTest {
 
     private static final String CONTROLLER = "Controller";
     private static final String SERVICE = "Service";
-    private static final String CONTROLLER_PACKAGE = "..controller..";
-    private static final String SERVICE_PACKAGE = "..service..";
 
     /**
      * Checks if every controller follows proper naming convention and has the required annotation
@@ -49,11 +47,11 @@ public class ArchitectureTest {
     @ArchTest
     private ArchRule controllerServiceLayers = Architectures.layeredArchitecture()
             .consideringOnlyDependenciesInLayers()
-            .layer(CONTROLLER_PACKAGE).definedBy(annotatedWith(RestController.class))
-            .layer(SERVICE_PACKAGE).definedBy(annotatedWith(Service.class))
-            .whereLayer(CONTROLLER_PACKAGE).mayNotBeAccessedByAnyLayer()
-            .whereLayer(CONTROLLER_PACKAGE).mayOnlyAccessLayers(SERVICE_PACKAGE)
-            .whereLayer(SERVICE_PACKAGE).mayOnlyBeAccessedByLayers(CONTROLLER_PACKAGE);
+            .layer(CONTROLLER).definedBy(annotatedWith(RestController.class))
+            .layer(SERVICE).definedBy(annotatedWith(Service.class))
+            .whereLayer(CONTROLLER).mayNotBeAccessedByAnyLayer()
+            .whereLayer(CONTROLLER).mayOnlyAccessLayers(SERVICE)
+            .whereLayer(SERVICE).mayOnlyBeAccessedByLayers(CONTROLLER);
 
     /**
      * Verifies that all the layer architecture rules defined via jmolecules library are in check
