@@ -22,4 +22,5 @@ public class TempController {
     public ResponseEntity<String> ping() {
         return ResponseEntity.ok(tempService.testServiceCall());
     }
+
 }
