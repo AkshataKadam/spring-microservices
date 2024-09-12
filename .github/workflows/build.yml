@@ -17,7 +17,7 @@ jobs:
 
       - name: Print version of Java and Maven
         run: |
-          echo "Workflow exceuted."
+          echo "Workflow executed."
           echo "JAVA version should print 21"
           java -version
           echo "Maven version should print 3.x.x"
