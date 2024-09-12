@@ -1,8 +1,10 @@
 package io.agamivriddhi.base.controller;
 
 import io.agamivriddhi.base.service.TempService;
+import jakarta.annotation.PostConstruct;
 import org.jmolecules.architecture.layered.ApplicationLayer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,12 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 @ApplicationLayer
 public class TempController {
 
+    @Value(value = "${welcome.msg}")
+    private String text;
+
+    @Value(value = "${user.role}")
+    private String role;
+
     TempService tempService;
 
     // decide whether to Autowire the constructor or not
     @Autowired
     TempController(TempService tempService) {
         this.tempService = tempService;
+    }
+
+    @PostConstruct
+    public void testSpringConfig() {
+        System.out.println("MESSAGE " + text);
+        System.out.println("ROLE " + role);
     }
 
     @GetMapping(value = "/ping")
