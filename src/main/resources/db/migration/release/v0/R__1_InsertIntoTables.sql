@@ -1,0 +1,1 @@
+INSERT INTO customer (id,city,name) VALUES (1,"Pune","John");
