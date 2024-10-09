@@ -1,5 +1,7 @@
 package io.agamivriddhi.base.controller;
 
+import io.agamivriddhi.base.entity.Customer;
+import io.agamivriddhi.base.repository.CustomerRepository;
 import io.agamivriddhi.base.service.TempService;
 import jakarta.annotation.PostConstruct;
 import org.jmolecules.architecture.layered.ApplicationLayer;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @ApplicationLayer
@@ -20,11 +24,14 @@ public class TempController {
     private String role;
 
     TempService tempService;
+    CustomerRepository customerRepository;
 
     // decide whether to Autowire the constructor or not
     @Autowired
-    TempController(TempService tempService) {
+    TempController(TempService tempService,
+                   CustomerRepository customerRepository) {
         this.tempService = tempService;
+        this.customerRepository = customerRepository;
     }
 
     @PostConstruct
@@ -36,6 +43,11 @@ public class TempController {
     @GetMapping(value = "/ping")
     public ResponseEntity<String> ping() {
         return ResponseEntity.ok(tempService.testServiceCall());
+    }
+
+    @GetMapping("/customers")
+    public List<Customer> getAllUsers() {
+        return customerRepository.findAll();
     }
 
 }
