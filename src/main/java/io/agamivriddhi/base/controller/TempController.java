@@ -3,6 +3,11 @@ package io.agamivriddhi.base.controller;
 import io.agamivriddhi.base.entity.Customer;
 import io.agamivriddhi.base.repository.CustomerRepository;
 import io.agamivriddhi.base.service.TempService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.annotation.PostConstruct;
 import org.jmolecules.architecture.layered.ApplicationLayer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +50,12 @@ public class TempController {
         return ResponseEntity.ok(tempService.testServiceCall());
     }
 
+    @Operation(summary = "Fetch all customers")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Fetched all customers",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Customer.class)) })
+                    })
     @GetMapping("/customers")
     public List<Customer> getAllUsers() {
         return customerRepository.findAll();
