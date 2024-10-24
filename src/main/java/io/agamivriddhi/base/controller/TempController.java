@@ -9,7 +9,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.jmolecules.architecture.layered.ApplicationLayer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +23,10 @@ import java.util.List;
 
 @RestController
 @ApplicationLayer
+@Slf4j
 public class TempController {
+
+    Logger LOGGER = LoggerFactory.getLogger(TempController.class);
 
     @Value(value = "${welcome.msg}")
     private String text;
@@ -58,6 +64,7 @@ public class TempController {
                     })
     @GetMapping("/customers")
     public List<Customer> getAllUsers() {
+        LOGGER.info("Entering controller getAllUsers");
         return customerRepository.findAll();
     }
 
