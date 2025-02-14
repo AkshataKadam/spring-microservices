@@ -1,9 +1,15 @@
 name: Test and Build
 
+#on:
+#  pull_request:
+#    branches: [master]
 on:
-  pull_request:
-    branches: [master]
-
+  push:
+    branches:
+      - master
+    tags:
+      - 'v*'
+      -
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,6 +28,34 @@ jobs:
           java -version
           echo "Maven version should print 3.x.x"
           mvn -version
+
+      - name: Get the latest tag
+        id: get_latest_tag
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          echo "Latest tag is $TAG"
+          echo "TAG=$TAG" >> $GITHUB_ENV
+
+      - name: Increment version in POM
+        id: increment_version
+        run: |
+          VERSION=${TAG#v}  # Remove the 'v' from the version tag (if it exists)
+          IFS='.' read -r -a version_parts <<< "$VERSION"
+          PATCH=${version_parts[2]}
+          PATCH=$((PATCH + 1))  # Increment the patch version
+          NEW_VERSION="${version_parts[0]}.${version_parts[1]}.$PATCH"
+          echo "New version will be $NEW_VERSION"
+
+          # Update the version in the pom.xml
+          mvn versions:set -DnewVersion=$NEW_VERSION
+
+      - name: Commit version bump
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add pom.xml
+          git commit -m "Auto-bump version to $NEW_VERSION"
+          git push
 
       - name: Test and package
         run: mvn clean package test
