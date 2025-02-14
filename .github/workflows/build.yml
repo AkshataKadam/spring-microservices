@@ -51,8 +51,8 @@ jobs:
 
       - name: Commit version bump
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "AkshataKadam"
+          git config --global user.email "akshatakadam1908@gmail.com"
           git add pom.xml
           git commit -m "Auto-bump version to $NEW_VERSION"
           git push
