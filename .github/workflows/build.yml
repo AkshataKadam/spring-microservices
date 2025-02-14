@@ -1,14 +1,14 @@
 name: Test and Build
 
-on:
-  pull_request:
-    branches: [master]
 #on:
-#  push:
-#    branches:
-#      - master
-#    tags:
-#      - 'v*'
+#  pull_request:
+#    branches: [master]
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - 'v*'
 
 jobs:
   build:
