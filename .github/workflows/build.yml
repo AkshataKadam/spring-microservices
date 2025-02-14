@@ -57,5 +57,6 @@ jobs:
           git commit -m "Auto-bump version to $NEW_VERSION"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:master
 
+
       - name: Test and package
         run: mvn clean package test
