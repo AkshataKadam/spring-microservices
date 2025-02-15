@@ -55,8 +55,7 @@ jobs:
           git config --global user.email "akshatakadam1908@gmail.com"
           git add pom.xml
           git commit -m "Auto-bump version to $NEW_VERSION"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:master
-
+          git push
 
       - name: Test and package
         run: mvn clean package test
