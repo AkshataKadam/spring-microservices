@@ -32,7 +32,7 @@ jobs:
       - name: Get the latest tag
         id: get_latest_tag
         run: |
-          TAG=0.0.1
+          TAG=0.0.2
           echo "Latest tag is $TAG"
           echo "TAG=$TAG" >> $GITHUB_ENV
 
@@ -40,9 +40,14 @@ jobs:
         id: increment_version
         run: |
           VERSION=${TAG#v}  # Remove the 'v' from the version tag (if it exists)
-          IFS='.' read -r -a version_parts <<< "$VERSION"
+      
           PATCH=${version_parts[2]}
+          echo "Patch 1 $PATCH"
+          echo "version_parts[2] $version_parts[2]"
+          echo "version_parts[1] $version_parts[1]"
+          echo "version_parts[0] $version_parts[0]"
           PATCH=$((PATCH + 1))  # Increment the patch version
+          echo "Patch 2 $PATCH"
           NEW_VERSION="${version_parts[0]}.${version_parts[1]}.$PATCH"
           echo "New version will be $NEW_VERSION"
 
