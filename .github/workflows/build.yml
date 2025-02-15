@@ -40,7 +40,7 @@ jobs:
         id: increment_version
         run: |
           VERSION=${TAG#v}  # Remove the 'v' from the version tag (if it exists)
-      
+          IFS='.' read -r -a version_parts <<< "$VERSION"
           PATCH=${version_parts[2]}
           echo "Patch 1 $PATCH"
           echo "version_parts[2] $version_parts[2]"
